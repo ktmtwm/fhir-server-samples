@@ -8,6 +8,10 @@ param
     [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
     [string]$EnvironmentName,
+    
+    [Parameter(Mandatory = $true)]
+    [ValidateNotNullOrEmpty()]
+    [string]$ResourceGroupNm,
 
     [Parameter(Mandatory = $false)]
     [bool]$SetUserSecrets = $false
