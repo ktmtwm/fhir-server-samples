@@ -19,7 +19,9 @@ param
         }
     })]
     [string]$EnvironmentName,
-    
+   
+    [Parameter(Mandatory = $true)]
+    [ValidateNotNullOrEmpty()]
     [string]$ResourceGroupNm,
 
     [Parameter(Mandatory = $false)]
