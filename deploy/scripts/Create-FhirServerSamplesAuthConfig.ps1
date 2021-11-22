@@ -173,8 +173,9 @@ if ($AdminPassword)
 }
 else
 {
-    Add-Type -AssemblyName System.Web
-    $password = [System.Web.Security.Membership]::GeneratePassword(16, 5)
+    # Add-Type -AssemblyName System.Web
+    # $password = [System.Web.Security.Membership]::GeneratePassword(16, 5)
+    $password = "Fhir12345_"
     $passwordSecureString = ConvertTo-SecureString $password -AsPlainText -Force
 }
 
