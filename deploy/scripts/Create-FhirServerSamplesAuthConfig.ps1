@@ -19,6 +19,8 @@ param
         }
     })]
     [string]$EnvironmentName,
+    
+    [string]$ResourceGroupNm,
 
     [Parameter(Mandatory = $false)]
     [string]$EnvironmentLocation = "West US",
@@ -27,7 +29,7 @@ param
     [String]$WebAppSuffix = "azurewebsites.net",
 
     [Parameter(Mandatory = $false)]
-    [string]$ResourceGroupName = $EnvironmentName,
+    [string]$ResourceGroupName = $ResourceGroupNm,
 
     [parameter(Mandatory = $false)]
     [string]$KeyVaultName = "$EnvironmentName-ts",
