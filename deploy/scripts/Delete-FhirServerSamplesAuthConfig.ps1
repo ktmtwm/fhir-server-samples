@@ -13,7 +13,7 @@ param
     [string]$EnvironmentLocation = "westus",
 
     [Parameter(Mandatory = $false )]
-    [String]$WebAppSuffix = "azurewebsites.net",
+    [String]$WebAppSuffix = "DeloittePACE.onmicrosoft.com",
 
     [Parameter(Mandatory = $false)]
     [string]$ResourceGroupName = $EnvironmentName,

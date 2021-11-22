@@ -28,7 +28,7 @@ param
     [string]$EnvironmentLocation = "australiaeast",
 
     [Parameter(Mandatory = $false )]
-    [String]$WebAppSuffix = "azurewebsites.net",
+    [String]$WebAppSuffix = "DeloittePACE.onmicrosoft.com",
 
     [Parameter(Mandatory = $false)]
     [string]$ResourceGroupName = $ResourceGroupNm,
