@@ -421,7 +421,7 @@
         {
             "name": "[concat(variables('growthChartName'),'-deploy')]",
             "type": "Microsoft.Resources/deployments",
-            "resourceGroup": "[concat(resourceGroup().name, '-sof')]",
+            "resourceGroup": "['platform']",
             "apiVersion": "2019-08-01",
             "properties": {
                 "templateLink": {
@@ -445,7 +445,7 @@
         {
             "name": "[concat(variables('medicationsName'),'-deploy')]",
             "type": "Microsoft.Resources/deployments",
-            "resourceGroup": "[concat(resourceGroup().name, '-sof')]",
+            "resourceGroup": "['platform']",
             "apiVersion": "2019-08-01",
             "properties": {
                 "templateLink": {
