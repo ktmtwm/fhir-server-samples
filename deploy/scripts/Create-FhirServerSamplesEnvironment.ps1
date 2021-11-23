@@ -220,9 +220,9 @@ if (!$resourceGroup) {
 }
 
 # Making a separate resource group for SMART on FHIR apps, since Linux Container apps cannot live in a resource group with windows apps
-$sofResourceGroup = Get-AzResourceGroup -Name "platform" -ErrorAction SilentlyContinue
+$sofResourceGroup = Get-AzResourceGroup -Name "${EnvironmentName}-sof" -ErrorAction SilentlyContinue
 if (!$sofResourceGroup) {
-    New-AzResourceGroup -Name "platform" -Location $EnvironmentLocation | Out-Null
+    New-AzResourceGroup -Name "${EnvironmentName}-sof" -Location $EnvironmentLocation | Out-Null
 }
 
 # Deploy the template
