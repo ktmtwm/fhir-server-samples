@@ -134,7 +134,7 @@ Write-Host "Ensuring API application exists"
 
 $fhirServiceName = "${EnvironmentName}srvr"
 if ($UsePaas) {
-    $fhirServiceUrl = "https://${EnvironmentName}.azurehealthcareapis.com"
+    $fhirServiceUrl = "https://${EnvironmentName}.DeloittePACE.onmicrosoft.com"
 } else {
     $fhirServiceUrl = "https://${fhirServiceName}.${WebAppSuffix}"    
 }

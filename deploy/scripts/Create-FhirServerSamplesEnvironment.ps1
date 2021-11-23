@@ -172,7 +172,7 @@ $aadAuthority = "https://login.microsoftonline.com/${tenantDomain}"
 $dashboardJSUrl = "https://${EnvironmentName}dash.DeloittePACE.onmicrosoft.com"
 
 if ($UsePaaS) {
-    $fhirServerUrl = "https://${EnvironmentName}.azurehealthcareapis.com"
+    $fhirServerUrl = "https://${EnvironmentName}.DeloittePACE.onmicrosoft.com"
 } else {
     $fhirServerUrl = "https://${EnvironmentName}srvr.DeloittePACE.onmicrosoft.com"
 }
