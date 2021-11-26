@@ -183,7 +183,7 @@
         "environmentName": "[if(empty(parameters('environmentName')), concat('fhirdemo', uniqueString(resourceGroup().id)), parameters('environmentName'))]",
         "fhirServiceName": "[if(parameters('usePaaS'), variables('environmentName'), concat(variables('environmentName'),'srvr'))]",
         "fhirImporterName": "[concat(variables('environmentName'),'imp')]",
-        "webAppsuffix": "[if(variables('isMAG'),'.azurewebsites.us','.azurewebsites.net')]",
+        "webAppsuffix": "[if(variables('isMAG'),'.azurewebsites.us','.DeloittePACE.onmicrosoft.com')]",
         "fhirServerUrlSuffix": "[if(parameters('usePaaS'),'.azurehealthcareapis.com', variables('webAppSuffix'))]",
         "fhirServiceUrl": "[concat('https://', variables('fhirServiceName'), variables('fhirServerUrlSuffix'))]",
         "fhirServiceKind": "[concat('fhir-', parameters('fhirVersion'))]",

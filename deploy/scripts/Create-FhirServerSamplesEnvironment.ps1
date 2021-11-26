@@ -165,7 +165,7 @@ $importerTemplate = "${githubRawBaseUrl}/${SourceRevision}/deploy/templates/azur
 $tenantDomain = $tenantInfo.TenantDomain
 $aadAuthority = "https://login.microsoftonline.com/${tenantDomain}"
 
-$dashboardJSUrl = "https://${EnvironmentName}dash.azurewebsites.net"
+$dashboardJSUrl = "https://${EnvironmentName}dash.DeloittePACE.onmicrosoft.com"
 
 if ($UsePaaS) {
     $fhirServerUrl = "https://${EnvironmentName}.DeloittePACE.onmicrosoft.com"
@@ -226,7 +226,7 @@ New-AzResourceGroupDeployment -TemplateUri $sandboxTemplate -environmentName $En
 
 Write-Host "Warming up site..."
 Invoke-WebRequest -Uri "${fhirServerUrl}/metadata" | Out-Null
-$functionAppUrl = "https://${EnvironmentName}imp.azurewebsites.net"
+$functionAppUrl = "https://${EnvironmentName}imp.DeloittePACE.onmicrosoft.com"
 Invoke-WebRequest -Uri $functionAppUrl | Out-Null 
 
 @{
