@@ -168,9 +168,9 @@ $aadAuthority = "https://login.microsoftonline.com/${tenantDomain}"
 $dashboardJSUrl = "https://${EnvironmentName}dash.azurewebsites.net"
 
 if ($UsePaaS) {
-    $fhirServerUrl = "https://${EnvironmentName}.azurehealthcareapis.com"
+    $fhirServerUrl = "https://${EnvironmentName}.DeloittePACE.onmicrosoft.com"
 } else {
-    $fhirServerUrl = "https://${EnvironmentName}srvr.azurewebsites.net"
+    $fhirServerUrl = "https://${EnvironmentName}srvr.DeloittePACE.onmicrosoft.com"
 }
 
 $confidentialClientIdKV = (Get-AzKeyVaultSecret -VaultName "${EnvironmentName}-ts" -Name "${EnvironmentName}-confidential-client-id")
