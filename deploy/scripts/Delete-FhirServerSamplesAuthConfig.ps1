@@ -13,7 +13,7 @@ param
     [string]$EnvironmentLocation = "westus",
 
     [Parameter(Mandatory = $false )]
-    [String]$WebAppSuffix = "DeloittePACE.onmicrosoft.com",
+    [String]$WebAppSuffix = "azurewebsites.net",
 
     [Parameter(Mandatory = $false)]
     [string]$ResourceGroupName = $EnvironmentName,
@@ -48,7 +48,7 @@ if (Get-Module -Name FhirServer) {
 
 $fhirServiceName = "${EnvironmentName}srvr"
 $fhirServiceUrl = "https://${fhirServiceName}.${WebAppSuffix}"
-$PaasUrl = "https://${EnvironmentName}.DeloittePACE.onmicrosoft.com"
+$PaasUrl = "https://${EnvironmentName}.azurehealthcareapis.com"
 
 $application = Get-AzureAdApplication -Filter "identifierUris/any(uri:uri eq '$PaasUrl')"
 

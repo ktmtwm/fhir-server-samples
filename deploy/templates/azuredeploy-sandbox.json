@@ -128,7 +128,7 @@
         },
         "fhirDashboardRepositoryUrl": {
             "type": "string",
-            "defaultValue": "https://github.com/ktmtwm/fhir-server-samples",
+            "defaultValue": "https://github.com/Microsoft/fhir-server-samples",
             "metadata": {
                 "description": "URL for FHIR dashboard repository"
             }

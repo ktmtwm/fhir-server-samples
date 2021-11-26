@@ -8,10 +8,6 @@ param
     [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
     [string]$EnvironmentName,
-    
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [string]$ResourceGroupNm,
 
     [Parameter(Mandatory = $false)]
     [bool]$SetUserSecrets = $false
@@ -27,10 +23,10 @@ catch {
     throw "Please log in to Azure RM with Login-AzAccount cmdlet before proceeding"
 }
 
-$dashboardUrl = "https://${EnvironmentName}dash.DeloittePACE.onmicrosoft.com"
-$growthChartAppLaunchUrl = "https://${EnvironmentName}growth.DeloittePACE.onmicrosoft.com/launch.html"
-$medicationsAppLaunchUrl = "https://${EnvironmentName}meds.DeloittePACE.onmicrosoft.com/launch.html"
-$fhirServerUrl = "https://${EnvironmentName}srvr.DeloittePACE.onmicrosoft.com"
+$dashboardUrl = "https://${EnvironmentName}dash.azurewebsites.net"
+$growthChartAppLaunchUrl = "https://${EnvironmentName}growth.azurewebsites.net/launch.html"
+$medicationsAppLaunchUrl = "https://${EnvironmentName}meds.azurewebsites.net/launch.html"
+$fhirServerUrl = "https://${EnvironmentName}srvr.azurewebsites.net"
 $dashboardUserUpn  = (Get-AzKeyVaultSecret -VaultName "${EnvironmentName}-ts" -Name "${EnvironmentName}-admin-upn").SecretValueText
 $dashboardUserPassword  = (Get-AzKeyVaultSecret -VaultName "${EnvironmentName}-ts" -Name "${EnvironmentName}-admin-password").SecretValueText
 $confidentialClientId  = (Get-AzKeyVaultSecret -VaultName "${EnvironmentName}-ts" -Name "${EnvironmentName}-confidential-client-id").SecretValueText

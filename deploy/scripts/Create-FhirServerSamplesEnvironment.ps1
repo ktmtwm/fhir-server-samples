@@ -19,10 +19,6 @@ param
     })]
     [string]$EnvironmentName,
 
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [string]$ResourceGroupNm,
-    
     [Parameter(Mandatory = $false)]
     [string]$EnvironmentLocation = "westus",
 
@@ -169,12 +165,12 @@ $importerTemplate = "${githubRawBaseUrl}/${SourceRevision}/deploy/templates/azur
 $tenantDomain = $tenantInfo.TenantDomain
 $aadAuthority = "https://login.microsoftonline.com/${tenantDomain}"
 
-$dashboardJSUrl = "https://${EnvironmentName}dash.DeloittePACE.onmicrosoft.com"
+$dashboardJSUrl = "https://${EnvironmentName}dash.azurewebsites.net"
 
 if ($UsePaaS) {
-    $fhirServerUrl = "https://${EnvironmentName}.DeloittePACE.onmicrosoft.com"
+    $fhirServerUrl = "https://${EnvironmentName}.azurehealthcareapis.com"
 } else {
-    $fhirServerUrl = "https://${EnvironmentName}srvr.DeloittePACE.onmicrosoft.com"
+    $fhirServerUrl = "https://${EnvironmentName}srvr.azurewebsites.net"
 }
 
 $confidentialClientIdKV = (Get-AzKeyVaultSecret -VaultName "${EnvironmentName}-ts" -Name "${EnvironmentName}-confidential-client-id")
@@ -214,9 +210,9 @@ if ([string]::IsNullOrEmpty($SqlAdminPassword))
     $SqlAdminPassword = ConvertTo-SecureString -AsPlainText -Force "DummySQLServerPasswordNotUsed"
 }
 
-$resourceGroup = Get-AzResourceGroup -Name $ResourceGroupNm -ErrorAction SilentlyContinue
+$resourceGroup = Get-AzResourceGroup -Name $EnvironmentName -ErrorAction SilentlyContinue
 if (!$resourceGroup) {
-    New-AzResourceGroup -Name $ResourceGroupNm -Location $EnvironmentLocation | Out-Null
+    New-AzResourceGroup -Name $EnvironmentName -Location $EnvironmentLocation | Out-Null
 }
 
 # Making a separate resource group for SMART on FHIR apps, since Linux Container apps cannot live in a resource group with windows apps
@@ -226,11 +222,11 @@ if (!$sofResourceGroup) {
 }
 
 # Deploy the template
-New-AzResourceGroupDeployment -TemplateUri $sandboxTemplate -environmentName $EnvironmentName -fhirApiLocation $FhirApiLocation -ResourceGroupName $ResourceGroupNm -fhirServerTemplateUrl $fhirServerTemplateUrl -fhirVersion $FhirVersion -sqlAdminPassword $SqlAdminPassword -aadAuthority $aadAuthority -aadDashboardClientId $confidentialClientId -aadDashboardClientSecret $confidentialClientSecret -aadServiceClientId $serviceClientId -aadServiceClientSecret $serviceClientSecret -smartAppClientId $publicClientId -fhirDashboardJSTemplateUrl $dashboardJSTemplate -fhirImporterTemplateUrl $importerTemplate -fhirDashboardRepositoryUrl $SourceRepository -fhirDashboardRepositoryBranch $SourceRevision -deployDashboardSourceCode $DeploySource -usePaaS $UsePaaS -accessPolicies $accessPolicies -enableExport $EnableExport
+New-AzResourceGroupDeployment -TemplateUri $sandboxTemplate -environmentName $EnvironmentName -fhirApiLocation $FhirApiLocation -ResourceGroupName $EnvironmentName -fhirServerTemplateUrl $fhirServerTemplateUrl -fhirVersion $FhirVersion -sqlAdminPassword $SqlAdminPassword -aadAuthority $aadAuthority -aadDashboardClientId $confidentialClientId -aadDashboardClientSecret $confidentialClientSecret -aadServiceClientId $serviceClientId -aadServiceClientSecret $serviceClientSecret -smartAppClientId $publicClientId -fhirDashboardJSTemplateUrl $dashboardJSTemplate -fhirImporterTemplateUrl $importerTemplate -fhirDashboardRepositoryUrl $SourceRepository -fhirDashboardRepositoryBranch $SourceRevision -deployDashboardSourceCode $DeploySource -usePaaS $UsePaaS -accessPolicies $accessPolicies -enableExport $EnableExport
 
 Write-Host "Warming up site..."
 Invoke-WebRequest -Uri "${fhirServerUrl}/metadata" | Out-Null
-$functionAppUrl = "https://${EnvironmentName}imp.DeloittePACE.onmicrosoft.com"
+$functionAppUrl = "https://${EnvironmentName}imp.azurewebsites.net"
 Invoke-WebRequest -Uri $functionAppUrl | Out-Null 
 
 @{

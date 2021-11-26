@@ -19,19 +19,15 @@ param
         }
     })]
     [string]$EnvironmentName,
-   
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [string]$ResourceGroupNm,
 
     [Parameter(Mandatory = $false)]
-    [string]$EnvironmentLocation = "australiaeast",
+    [string]$EnvironmentLocation = "West US",
 
     [Parameter(Mandatory = $false )]
-    [String]$WebAppSuffix = "DeloittePACE.onmicrosoft.com",
+    [String]$WebAppSuffix = "azurewebsites.net",
 
     [Parameter(Mandatory = $false)]
-    [string]$ResourceGroupName = $ResourceGroupNm,
+    [string]$ResourceGroupName = $EnvironmentName,
 
     [parameter(Mandatory = $false)]
     [string]$KeyVaultName = "$EnvironmentName-ts",
@@ -134,7 +130,7 @@ Write-Host "Ensuring API application exists"
 
 $fhirServiceName = "${EnvironmentName}srvr"
 if ($UsePaas) {
-    $fhirServiceUrl = "https://${EnvironmentName}.DeloittePACE.onmicrosoft.com"
+    $fhirServiceUrl = "https://${EnvironmentName}.azurehealthcareapis.com"
 } else {
     $fhirServiceUrl = "https://${fhirServiceName}.${WebAppSuffix}"    
 }
@@ -173,9 +169,8 @@ if ($AdminPassword)
 }
 else
 {
-    # Add-Type -AssemblyName System.Web
-    # $password = [System.Web.Security.Membership]::GeneratePassword(16, 5)
-    $password = "Fhir12345_"
+    Add-Type -AssemblyName System.Web
+    $password = [System.Web.Security.Membership]::GeneratePassword(16, 5)
     $passwordSecureString = ConvertTo-SecureString $password -AsPlainText -Force
 }
 
